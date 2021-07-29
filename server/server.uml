@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>D:/Учёба/Диплом/server</OriginalElement>
+  <nodes>
+    <node x="0.0" y="556.0">ru.sibsutis.server.ServerRepository</node>
+    <node x="261.0" y="0.0">settings</node>
+    <node x="0.0" y="0.0">ru.sibsutis.server.entities.WeatherEntity</node>
+    <node x="550.0" y="0.0">build</node>
+    <node x="0.0" y="344.0">ru.sibsutis.server.ServerApplication</node>
+    <node x="371.0" y="556.0">ru.sibsutis.server.ServerApplicationTests</node>
+    <node x="302.0" y="344.0">ru.sibsutis.server.ServerController</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="139.0" y="279.0" />
+  <SelectedNodes>
+    <node>ru.sibsutis.server.entities.WeatherEntity</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

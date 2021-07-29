@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Last records</title>
+</head>
+<body>
+<button onClick="window.location='/'">Real-time chart</button>
+<button onClick="window.location='/history'">History</button>
+<button onClick="window.location='/download'">Generate JSON</button>
+<table cellspacing="0" border="1" cellpadding="5" width="400">
+  <tr>
+    <th>Timestamp</th>
+    <th>Temperature</th>
+    <th>Humidity</th>
+    <th>Id</th>
+  </tr>
+  <tr th:each="record : ${list}">
+    <td style="text-align:center" th:text="${record.timestamp}"></td>
+    <td style="text-align:center" th:text="${record.temp}"></td>
+    <td style="text-align:center" th:text="${record.hum}"></td>
+    <td style="text-align:center" th:text="${record.id}"></td>
+  </tr>
+</table>
+</body>
+</html>

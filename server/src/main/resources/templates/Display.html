@@ -1,0 +1,63 @@
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<title>Display</title>
+<head>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        $(document).ready(function() {
+            var data = [];
+            var data1 = [];
+            var json = [[${weathers}]];
+            for (var i = 0; i < 10; i++) {
+                data.push([new Date(json[i].timestamp), json[i].temp]);
+                data1.push([new Date(json[i].timestamp), json[i].hum])
+            }
+            var g = new Dygraph(document.getElementById("temp_charts"), data, { // temp
+                legend: 'always',
+                title: 'Temperature chart',
+                ylabel: 'Temperature, (°C)',
+                axisLineWidth: 2,
+                pointSize: 5,
+                color: 'red',
+                drawPoints: true,
+                valueRange: [-40.0, 100.0],
+                labels: ['Time', 'Temperature']
+            });
+            var g1 = new Dygraph(document.getElementById("hum_charts"), data1, { // temp
+                legend: 'always',
+                title: 'Humidity chart',
+                ylabel: 'Humidity, (%)',
+                axisLineWidth: 2,
+                pointSize: 5,
+                color: 'blue',
+                drawPoints: true,
+                valueRange: [0.0, 110.0],
+                labels: ['Time', 'Humidity']
+            });
+
+            setInterval(function() {
+                $.getJSON('/api/get', function (inp) {
+                    data.shift();
+                    data.push([new Date(inp[0].timestamp), inp[0].temp]);
+                    data1.shift();
+                    data1.push([new Date(inp[0].timestamp), inp[0].hum]);
+                    g.updateOptions( { 'file': data } );
+                    g1.updateOptions( { 'file': data1 } );
+                    document.getElementById("cur_temp").innerHTML = "Current temperature: " + inp[0].temp + " °C";
+                    document.getElementById("cur_hum").innerHTML = "Current humidity: " + inp[0].hum + " %";
+                })
+            }, 2000);
+        });
+    </script>
+</head>
+<body>
+<button onClick="window.location='/history'">History</button>
+<button onClick="window.location='/last'">Last records</button>
+<button onClick="window.location='/download'">Generate JSON</button>
+<div id="temp_charts" style="width:800px; height:300px;"></div>
+<div id="cur_temp">Cur temp:</div>
+<div id="hum_charts" style="width:800px; height:300px;"></div>
+<div id="cur_hum">Cur hum:</div>
+</body>
+</html>
